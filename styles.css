@@ -12,6 +12,18 @@
   --shadow: 0 18px 50px rgba(27, 36, 48, 0.14);
 }
 
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --ink: #eef2f7;
+  --muted: #9aa5b5;
+  --line: #2d3644;
+  --surface: #1a2029;
+  --surface-soft: #222a35;
+  --accent: #14b8a6;
+  --accent-dark: #0d9488;
+  --shadow: 0 18px 50px rgba(0, 0, 0, 0.45);
+}
+
 * {
   box-sizing: border-box;
 }
@@ -26,11 +38,21 @@ body {
   background:
     radial-gradient(circle at top left, rgba(15, 118, 110, 0.18), transparent 30rem),
     linear-gradient(135deg, #f8fafc 0%, #e9eef6 48%, #f7f1e5 100%);
+  transition:
+    background 200ms ease,
+    color 200ms ease;
+}
+
+:root[data-theme="dark"] body {
+  background:
+    radial-gradient(circle at top left, rgba(20, 184, 166, 0.16), transparent 30rem),
+    linear-gradient(135deg, #10151c 0%, #141b24 48%, #191510 100%);
 }
 
 button,
 input,
-textarea {
+textarea,
+select {
   font: inherit;
 }
 
@@ -97,6 +119,33 @@ h2 {
   background: rgba(255, 255, 255, 0.82);
   box-shadow: var(--shadow);
   backdrop-filter: blur(18px);
+  transition:
+    background 200ms ease,
+    border-color 200ms ease;
+}
+
+:root[data-theme="dark"] .date-card,
+:root[data-theme="dark"] .panel {
+  border-color: rgba(45, 54, 68, 0.9);
+  background: rgba(26, 32, 41, 0.82);
+}
+
+.topbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+#theme-toggle {
+  border: 1px solid var(--line);
+  color: var(--ink);
+  background: transparent;
+}
+
+#theme-toggle:hover {
+  background: var(--surface-soft);
+  box-shadow: none;
+  transform: none;
 }
 
 .date-card {
@@ -150,12 +199,13 @@ h2 {
 
 .input-row {
   display: grid;
-  grid-template-columns: 1fr 90px;
+  grid-template-columns: 1fr 110px 150px 90px;
   gap: 10px;
 }
 
 input,
-textarea {
+textarea,
+select {
   width: 100%;
   border: 1px solid var(--line);
   border-radius: 8px;
@@ -164,13 +214,21 @@ textarea {
   color: var(--ink);
 }
 
-input {
+:root[data-theme="dark"] input,
+:root[data-theme="dark"] textarea,
+:root[data-theme="dark"] select {
+  background: var(--surface);
+}
+
+input,
+select {
   min-height: 44px;
   padding: 0 14px;
 }
 
 input:focus,
-textarea:focus {
+textarea:focus,
+select:focus {
   border-color: var(--accent);
   box-shadow: 0 0 0 4px rgba(15, 118, 110, 0.12);
 }
@@ -226,10 +284,26 @@ textarea:focus {
   color: var(--muted);
 }
 
+.progress-track {
+  height: 8px;
+  margin-bottom: 14px;
+  border-radius: 999px;
+  background: var(--surface-soft);
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  width: 0%;
+  border-radius: 999px;
+  background: var(--accent);
+  transition: width 200ms ease;
+}
+
 .task-list {
   display: grid;
   gap: 10px;
-  min-height: 244px;
+  min-height: 220px;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -246,9 +320,62 @@ textarea:focus {
   background: var(--surface-soft);
 }
 
-.task-item.done span {
+.task-info {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.task-title {
+  overflow-wrap: anywhere;
+}
+
+.task-title.done {
   color: var(--muted);
   text-decoration: line-through;
+}
+
+.task-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.badge-high {
+  color: var(--rose);
+  background: rgba(232, 102, 102, 0.15);
+}
+
+.badge-medium {
+  color: #a8710f;
+  background: rgba(242, 184, 75, 0.2);
+}
+
+.badge-low {
+  color: var(--accent-dark);
+  background: rgba(15, 118, 110, 0.12);
+}
+
+.due {
+  color: var(--muted);
+  font-size: 0.78rem;
+}
+
+.due.overdue {
+  color: var(--rose);
+  font-weight: 700;
 }
 
 .task-item button {
@@ -256,6 +383,10 @@ textarea:focus {
   border-radius: 8px;
   color: var(--ink);
   background: #fff;
+}
+
+:root[data-theme="dark"] .task-item button {
+  background: var(--surface);
 }
 
 .task-item .delete {
@@ -295,6 +426,10 @@ textarea {
     flex-direction: column;
   }
 
+  .topbar-actions {
+    justify-content: space-between;
+  }
+
   .date-card {
     text-align: left;
   }
@@ -316,5 +451,10 @@ textarea {
 
   .input-row {
     grid-template-columns: 1fr;
+  }
+
+  .topbar-actions {
+    flex-direction: column;
+    align-items: stretch;
   }
 }

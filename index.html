@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mukul Focus Board</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <section class="topbar" aria-label="Dashboard overview">
+        <div>
+          <p class="eyebrow">Mukulproject</p>
+          <h1>Focus Board</h1>
+        </div>
+        <div class="date-card">
+          <span id="weekday">Today</span>
+          <strong id="today">Ready</strong>
+        </div>
+      </section>
+
+      <section class="grid">
+        <article class="panel hero-panel">
+          <div>
+            <p class="eyebrow">Plan your day</p>
+            <h2>Pick the next useful thing, then give it full attention.</h2>
+          </div>
+          <form id="task-form" class="task-form">
+            <label for="task-input">New task</label>
+            <div class="input-row">
+              <input id="task-input" type="text" placeholder="Add a task..." maxlength="80" />
+              <button type="submit">Add</button>
+            </div>
+          </form>
+        </article>
+
+        <article class="panel timer-panel">
+          <p class="eyebrow">Focus timer</p>
+          <div id="timer" class="timer">25:00</div>
+          <div class="timer-actions" aria-label="Timer controls">
+            <button id="start-timer" type="button">Start</button>
+            <button id="reset-timer" type="button">Reset</button>
+          </div>
+        </article>
+
+        <article class="panel tasks-panel">
+          <div class="panel-title">
+            <div>
+              <p class="eyebrow">Tasks</p>
+              <h2>Today's list</h2>
+            </div>
+            <strong id="task-count">0 open</strong>
+          </div>
+          <ul id="task-list" class="task-list" aria-live="polite"></ul>
+        </article>
+
+        <article class="panel notes-panel">
+          <div class="panel-title">
+            <div>
+              <p class="eyebrow">Notes</p>
+              <h2>Quick scratchpad</h2>
+            </div>
+          </div>
+          <textarea id="notes" placeholder="Capture ideas, reminders, or links..."></textarea>
+        </article>
+      </section>
+    </main>
+    <script src="app.js"></script>
+  </body>
+</html>
